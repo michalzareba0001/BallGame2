@@ -46,4 +46,20 @@ body #gameboard #ball2 {
   left: 10%;
   transform: translate(0%, 99%);
   border-radius: 50%;
+}
+body #gameboard .wall1 {
+  width: 20px;
+  height: 100px;
+  background-color: rgb(255, 255, 255);
+  position: absolute;
+  bottom: 50%;
+  right: 0;
+}
+body #gameboard .wall2 {
+  width: 20px;
+  height: 100px;
+  background-color: rgb(255, 255, 255);
+  position: absolute;
+  bottom: 50%;
+  right: 0;
 }/*# sourceMappingURL=style.css.map */

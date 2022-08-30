@@ -1,4 +1,5 @@
 var gameboard = document.getElementById('gameboard');
+var gameboardWidth = gameboard.offsetWidth;
 var floor = document.getElementById('floor');
 var floorBottom = parseInt(window.getComputedStyle(floor).getPropertyValue('bottom'));
 var floorHeight = parseInt(window.getComputedStyle(floor).getPropertyValue('height'));
@@ -23,6 +24,7 @@ var downTime1;
 var isJumping2 = false;
 var upTime2;
 var downTime2;
+var a = 0;
 function jumpBall1() {
     if (isJumping1)
         return;
@@ -63,6 +65,57 @@ function jumpBall2() {
         isJumping2 = true;
     }, 20);
 }
+function generateWalls1() {
+    var walls1 = document.querySelector('.walls1');
+    var wall1 = document.createElement('div');
+    wall1.setAttribute('class', 'wall1');
+    walls1.appendChild(wall1);
+    a++;
+    var randomTimeout = Math.floor(Math.random() * 1500) + 1500;
+    var wall1Right = -20;
+    var wall1Width = 20;
+    var wall1Left = wall1Right - wall1Width;
+    var wall1Bottom = parseInt(window.getComputedStyle(wall1).getPropertyValue('bottom'));
+    var wall1Height = Math.floor(Math.random() * 60) + 75;
+    function moveWall1() {
+        wall1Right += 5;
+        wall1.style.right = wall1Right + "px";
+        wall1.style.bottom = wall1Bottom + "px";
+        wall1.style.width = wall1Width + "px";
+        wall1.style.height = wall1Height + "px";
+        if (wall1Right > gameboardWidth) {
+            wall1.remove();
+        }
+    }
+    var wall1Interval = setInterval(moveWall1, 20);
+    var wall1Timeout = setTimeout(generateWalls1, randomTimeout);
+}
+function generateWalls2() {
+    var walls2 = document.querySelector('.walls2');
+    var wall2 = document.createElement('div');
+    wall2.setAttribute('class', 'wall2');
+    walls2.appendChild(wall2);
+    var randomTimeout2 = Math.floor(Math.random() * 2000) + 1500;
+    var wall2Right = -20;
+    var wall2Width = 20;
+    var wall2Left = wall2Right - wall2Width;
+    var wall2Height = Math.floor(Math.random() * 60) + 75;
+    var wall2Bottom = parseInt(window.getComputedStyle(wall2).getPropertyValue('bottom')) - wall2Height;
+    function moveWall2() {
+        wall2Right += 5;
+        wall2.style.right = wall2Right + "px";
+        wall2.style.bottom = wall2Bottom + "px";
+        wall2.style.width = wall2Width + "px";
+        wall2.style.height = wall2Height + "px";
+        if (wall2Right > gameboardWidth) {
+            wall2.remove();
+        }
+    }
+    var wall2Interval = setInterval(moveWall2, 20);
+    var wall2Timeout = setTimeout(generateWalls2, randomTimeout2);
+}
+generateWalls1();
+generateWalls2();
 function control(e) {
     if (e.key == "ArrowUp") {
         jumpBall1();
