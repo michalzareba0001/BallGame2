@@ -30,10 +30,10 @@ let isJumping2 = false;
 let upTime2;
 let downTime2;
 
-let a=0;
 let scoreCounter = 0;
 
 let livesCounter = 10;
+
 
 function score() {
     scoreCounter++;
@@ -89,15 +89,14 @@ function generateWalls1() {
     let wall1 = document.createElement('div');
     wall1.setAttribute('class', 'wall1');
     walls1.appendChild(wall1);
-    a++;
 
 
-    let randomTimeout = Math.floor(Math.random() * 1500) + 1500;
+    let randomTimeout = Math.floor(Math.random() * 1000) + 1500;
     let wall1Right = -20;
     let wall1Width = 20;
     let wall1Left = wall1Right - wall1Width;
     let wall1Bottom = parseInt(window.getComputedStyle(wall1).getPropertyValue('bottom'));
-    let wall1Height = Math.floor(Math.random() * 60) + 75;
+    let wall1Height = Math.floor(Math.random() * 80) + 50;
 
     function moveWall1() {
         wall1Right += 5;
@@ -113,7 +112,15 @@ function generateWalls1() {
         if (ball1Right <= wall1Right + wall1Width && ball1Right + ball1Width >= wall1Right && ball1Bottom <= wall1Bottom + wall1Height && ball1Bottom + ball1Height >= wall1Bottom) {
             livesCounter--;
             document.getElementById('lives').innerHTML = livesCounter.toString();
+            ball1.style.display = 'none';
+            setTimeout(() => {
+            ball1.style.display = 'block';
+            }, 1000);
             
+            if (livesCounter == 0) {
+                alert('Game Over');
+                window.location.reload();
+            }
         }
         
     }
@@ -133,7 +140,7 @@ function generateWalls2() {
     let wall2Right = -20;
     let wall2Width = 20;
     let wall2Left = wall2Right - wall2Width;
-    let wall2Height = Math.floor(Math.random() * 60) + 75;
+    let wall2Height = Math.floor(Math.random() * 80) + 50;
     let wall2Bottom = parseInt(window.getComputedStyle(wall2).getPropertyValue('bottom')) - wall2Height;
 
 
@@ -149,7 +156,18 @@ function generateWalls2() {
         }
 
         if (ball2Right <= wall2Right + wall2Width && ball2Right + ball2Width >= wall2Right && ball2Bottom <= wall2Bottom + wall2Height && ball2Top >= wall2Bottom) {
-            console.log('hit ball 2');
+            livesCounter--;
+            document.getElementById('lives').innerHTML = livesCounter.toString();
+            ball2.style.display = 'none';
+            setTimeout(() => {
+            ball2.style.display = 'block';
+            }, 1000);
+
+            if (livesCounter == 0) {
+                alert('Game Over');
+                window.location.reload();
+            }
+
         }
     }
 
@@ -170,3 +188,4 @@ function control(e) {
 }
 
 document.addEventListener('keydown', control);
+

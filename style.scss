@@ -84,6 +84,42 @@ body {
             font-size: 1.1rem;
         }
 
+        .arrowUp{
+            font-size: 1.5rem;
+            position: absolute;
+            top: 10%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            opacity: 0.5;
+
+
+            img{
+                width: 6rem;
+                height: 6rem;
+            }
+        }
+
+        .arrowDown{
+            font-size: 1.5rem;
+            position: absolute;
+            bottom: 10%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            opacity: 0.5;
+
+
+            img{
+                width: 6rem;
+                height: 6rem;
+            }
+        }
+
+        
+
 
 
     }

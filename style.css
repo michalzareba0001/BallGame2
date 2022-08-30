@@ -76,4 +76,32 @@ body #gameboard .lives {
   right: 0;
   padding: 1rem;
   font-size: 1.1rem;
+}
+body #gameboard .arrowUp {
+  font-size: 1.5rem;
+  position: absolute;
+  top: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  opacity: 0.5;
+}
+body #gameboard .arrowUp img {
+  width: 6rem;
+  height: 6rem;
+}
+body #gameboard .arrowDown {
+  font-size: 1.5rem;
+  position: absolute;
+  bottom: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  opacity: 0.5;
+}
+body #gameboard .arrowDown img {
+  width: 6rem;
+  height: 6rem;
 }/*# sourceMappingURL=style.css.map */

@@ -24,7 +24,6 @@ var downTime1;
 var isJumping2 = false;
 var upTime2;
 var downTime2;
-var a = 0;
 var scoreCounter = 0;
 var livesCounter = 10;
 function score() {
@@ -77,13 +76,12 @@ function generateWalls1() {
     var wall1 = document.createElement('div');
     wall1.setAttribute('class', 'wall1');
     walls1.appendChild(wall1);
-    a++;
-    var randomTimeout = Math.floor(Math.random() * 1500) + 1500;
+    var randomTimeout = Math.floor(Math.random() * 1000) + 1500;
     var wall1Right = -20;
     var wall1Width = 20;
     var wall1Left = wall1Right - wall1Width;
     var wall1Bottom = parseInt(window.getComputedStyle(wall1).getPropertyValue('bottom'));
-    var wall1Height = Math.floor(Math.random() * 60) + 75;
+    var wall1Height = Math.floor(Math.random() * 80) + 50;
     function moveWall1() {
         wall1Right += 5;
         var ball1Right = parseInt(window.getComputedStyle(ball1).getPropertyValue('right'));
@@ -97,6 +95,14 @@ function generateWalls1() {
         if (ball1Right <= wall1Right + wall1Width && ball1Right + ball1Width >= wall1Right && ball1Bottom <= wall1Bottom + wall1Height && ball1Bottom + ball1Height >= wall1Bottom) {
             livesCounter--;
             document.getElementById('lives').innerHTML = livesCounter.toString();
+            ball1.style.display = 'none';
+            setTimeout(function () {
+                ball1.style.display = 'block';
+            }, 1000);
+            if (livesCounter == 0) {
+                alert('Game Over');
+                window.location.reload();
+            }
         }
     }
     var wall1Interval = setInterval(moveWall1, 20);
@@ -111,7 +117,7 @@ function generateWalls2() {
     var wall2Right = -20;
     var wall2Width = 20;
     var wall2Left = wall2Right - wall2Width;
-    var wall2Height = Math.floor(Math.random() * 60) + 75;
+    var wall2Height = Math.floor(Math.random() * 80) + 50;
     var wall2Bottom = parseInt(window.getComputedStyle(wall2).getPropertyValue('bottom')) - wall2Height;
     function moveWall2() {
         wall2Right += 5;
@@ -124,7 +130,16 @@ function generateWalls2() {
             wall2.remove();
         }
         if (ball2Right <= wall2Right + wall2Width && ball2Right + ball2Width >= wall2Right && ball2Bottom <= wall2Bottom + wall2Height && ball2Top >= wall2Bottom) {
-            console.log('hit ball 2');
+            livesCounter--;
+            document.getElementById('lives').innerHTML = livesCounter.toString();
+            ball2.style.display = 'none';
+            setTimeout(function () {
+                ball2.style.display = 'block';
+            }, 1000);
+            if (livesCounter == 0) {
+                alert('Game Over');
+                window.location.reload();
+            }
         }
     }
     var wall2Interval = setInterval(moveWall2, 20);
