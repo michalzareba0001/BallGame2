@@ -68,6 +68,22 @@ body {
             right: 0;
         }
 
+        .score{
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .lives{
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 1rem;
+            font-size: 1.1rem;
+        }
+
 
 
     }

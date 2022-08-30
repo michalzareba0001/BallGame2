@@ -62,4 +62,18 @@ body #gameboard .wall2 {
   position: absolute;
   bottom: 50%;
   right: 0;
+}
+body #gameboard .score {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 1rem;
+  font-size: 1.1rem;
+}
+body #gameboard .lives {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1rem;
+  font-size: 1.1rem;
 }/*# sourceMappingURL=style.css.map */

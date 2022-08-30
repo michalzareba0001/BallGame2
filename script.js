@@ -25,6 +25,13 @@ var isJumping2 = false;
 var upTime2;
 var downTime2;
 var a = 0;
+var scoreCounter = 0;
+var livesCounter = 10;
+function score() {
+    scoreCounter++;
+    document.getElementById('score').innerHTML = scoreCounter.toString();
+}
+var scoreInterval = setInterval(score, 500);
 function jumpBall1() {
     if (isJumping1)
         return;
@@ -79,12 +86,17 @@ function generateWalls1() {
     var wall1Height = Math.floor(Math.random() * 60) + 75;
     function moveWall1() {
         wall1Right += 5;
+        var ball1Right = parseInt(window.getComputedStyle(ball1).getPropertyValue('right'));
         wall1.style.right = wall1Right + "px";
         wall1.style.bottom = wall1Bottom + "px";
         wall1.style.width = wall1Width + "px";
         wall1.style.height = wall1Height + "px";
         if (wall1Right > gameboardWidth) {
             wall1.remove();
+        }
+        if (ball1Right <= wall1Right + wall1Width && ball1Right + ball1Width >= wall1Right && ball1Bottom <= wall1Bottom + wall1Height && ball1Bottom + ball1Height >= wall1Bottom) {
+            livesCounter--;
+            document.getElementById('lives').innerHTML = livesCounter.toString();
         }
     }
     var wall1Interval = setInterval(moveWall1, 20);
@@ -103,12 +115,16 @@ function generateWalls2() {
     var wall2Bottom = parseInt(window.getComputedStyle(wall2).getPropertyValue('bottom')) - wall2Height;
     function moveWall2() {
         wall2Right += 5;
+        var ball2Right = parseInt(window.getComputedStyle(ball2).getPropertyValue('right'));
         wall2.style.right = wall2Right + "px";
         wall2.style.bottom = wall2Bottom + "px";
         wall2.style.width = wall2Width + "px";
         wall2.style.height = wall2Height + "px";
         if (wall2Right > gameboardWidth) {
             wall2.remove();
+        }
+        if (ball2Right <= wall2Right + wall2Width && ball2Right + ball2Width >= wall2Right && ball2Bottom <= wall2Bottom + wall2Height && ball2Top >= wall2Bottom) {
+            console.log('hit ball 2');
         }
     }
     var wall2Interval = setInterval(moveWall2, 20);
