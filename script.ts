@@ -1,5 +1,11 @@
 const gameboard = document.getElementById('gameboard');
 const gameboardWidth = gameboard.offsetWidth;
+const soundJump1 = new Audio('./sound/zapsplat_jump1.mp3');
+const soundJump2 = new Audio('./sound/zapsplat_jump2.mp3');
+const soundColision1 = new Audio('./sound/zapsplat_colision.mp3');
+const soundColision2 = new Audio('./sound/zapsplat_colision.mp3');
+const soundStart = new Audio('./sound/zapsplat_start.mp3');
+const soundGameover = new Audio('./sound/zapsplat_gameover.mp3');
 
 let floor = document.getElementById('floor');
 let floorBottom = parseInt(window.getComputedStyle(floor).getPropertyValue('bottom'));
@@ -62,6 +68,8 @@ function jumpBall1() {
         ball1.style.bottom = ball1Bottom + "px";
         isJumping1 = true;
     }, 20);
+    soundJump1.play();
+
 }
 function jumpBall2() {
     if (isJumping2) return;
@@ -82,6 +90,7 @@ function jumpBall2() {
         ball2.style.bottom = ball2Top + "px";
         isJumping2 = true;
     }, 20);
+    soundJump2.play();
 }
 
 function generateWalls1() {
@@ -110,6 +119,7 @@ function generateWalls1() {
         }
 
         if (ball1Right <= wall1Right + wall1Width && ball1Right + ball1Width >= wall1Right && ball1Bottom <= wall1Bottom + wall1Height && ball1Bottom + ball1Height >= wall1Bottom) {
+            soundColision1.play();
             livesCounter--;
             document.getElementById('lives').innerHTML = livesCounter.toString();
             ball1.style.display = 'none';
@@ -118,6 +128,7 @@ function generateWalls1() {
             }, 1000);
             
             if (livesCounter == 0) {
+                soundGameover.play();
                 alert('Game Over');
                 window.location.reload();
             }
@@ -156,6 +167,7 @@ function generateWalls2() {
         }
 
         if (ball2Right <= wall2Right + wall2Width && ball2Right + ball2Width >= wall2Right && ball2Bottom <= wall2Bottom + wall2Height && ball2Top >= wall2Bottom) {
+            soundColision2.play();
             livesCounter--;
             document.getElementById('lives').innerHTML = livesCounter.toString();
             ball2.style.display = 'none';
@@ -164,6 +176,7 @@ function generateWalls2() {
             }, 1000);
 
             if (livesCounter == 0) {
+                soundGameover.play();
                 alert('Game Over');
                 window.location.reload();
             }
@@ -188,4 +201,6 @@ function control(e) {
 }
 
 document.addEventListener('keydown', control);
+
+document.addEventListener('onLoad', soundStart.play());
 

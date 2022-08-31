@@ -1,5 +1,11 @@
 var gameboard = document.getElementById('gameboard');
 var gameboardWidth = gameboard.offsetWidth;
+var soundJump1 = new Audio('./sound/zapsplat_jump1.mp3');
+var soundJump2 = new Audio('./sound/zapsplat_jump2.mp3');
+var soundColision1 = new Audio('./sound/zapsplat_colision.mp3');
+var soundColision2 = new Audio('./sound/zapsplat_colision.mp3');
+var soundStart = new Audio('./sound/zapsplat_start.mp3');
+var soundGameover = new Audio('./sound/zapsplat_gameover.mp3');
 var floor = document.getElementById('floor');
 var floorBottom = parseInt(window.getComputedStyle(floor).getPropertyValue('bottom'));
 var floorHeight = parseInt(window.getComputedStyle(floor).getPropertyValue('height'));
@@ -50,6 +56,7 @@ function jumpBall1() {
         ball1.style.bottom = ball1Bottom + "px";
         isJumping1 = true;
     }, 20);
+    soundJump1.play();
 }
 function jumpBall2() {
     if (isJumping2)
@@ -70,6 +77,7 @@ function jumpBall2() {
         ball2.style.bottom = ball2Top + "px";
         isJumping2 = true;
     }, 20);
+    soundJump2.play();
 }
 function generateWalls1() {
     var walls1 = document.querySelector('.walls1');
@@ -93,6 +101,7 @@ function generateWalls1() {
             wall1.remove();
         }
         if (ball1Right <= wall1Right + wall1Width && ball1Right + ball1Width >= wall1Right && ball1Bottom <= wall1Bottom + wall1Height && ball1Bottom + ball1Height >= wall1Bottom) {
+            soundColision1.play();
             livesCounter--;
             document.getElementById('lives').innerHTML = livesCounter.toString();
             ball1.style.display = 'none';
@@ -100,6 +109,7 @@ function generateWalls1() {
                 ball1.style.display = 'block';
             }, 1000);
             if (livesCounter == 0) {
+                soundGameover.play();
                 alert('Game Over');
                 window.location.reload();
             }
@@ -130,6 +140,7 @@ function generateWalls2() {
             wall2.remove();
         }
         if (ball2Right <= wall2Right + wall2Width && ball2Right + ball2Width >= wall2Right && ball2Bottom <= wall2Bottom + wall2Height && ball2Top >= wall2Bottom) {
+            soundColision2.play();
             livesCounter--;
             document.getElementById('lives').innerHTML = livesCounter.toString();
             ball2.style.display = 'none';
@@ -137,6 +148,7 @@ function generateWalls2() {
                 ball2.style.display = 'block';
             }, 1000);
             if (livesCounter == 0) {
+                soundGameover.play();
                 alert('Game Over');
                 window.location.reload();
             }
@@ -156,3 +168,4 @@ function control(e) {
     }
 }
 document.addEventListener('keydown', control);
+document.addEventListener('onLoad', soundStart.play());
